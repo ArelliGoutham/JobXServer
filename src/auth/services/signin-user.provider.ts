@@ -60,8 +60,8 @@ export class SigninUserProvider {
       secure: this.appConfiguration.environment === 'production' ? true : false,
       path: '/',
       sameSite:
-        // this.appConfiguration.environment === 'production' ? 'none' : 'lax',
-        'lax',
+        this.appConfiguration.environment === 'production' ? 'none' : 'lax',
+      // 'lax',
     });
     let response = {
       name: user.name,
