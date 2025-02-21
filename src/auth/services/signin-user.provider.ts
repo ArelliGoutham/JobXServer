@@ -61,7 +61,6 @@ export class SigninUserProvider {
       path: '/',
       sameSite:
         this.appConfiguration.environment === 'production' ? 'none' : 'lax',
-      // 'lax',
     });
     let response = {
       name: user.name,

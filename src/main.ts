@@ -13,7 +13,6 @@ async function bootstrap() {
     origin: process.env.ALLOWED_ORIGIN || 'https://job-x-tracker.vercel.app',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-    // allowedHeaders: ['Content-Type', 'Authorization'],
   });
 
   app.useGlobalPipes(
