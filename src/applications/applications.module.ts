@@ -6,17 +6,18 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { JobApplication } from './applications.entity';
 import { GetApplicationsProvider } from './services/get-applications.provider';
 import { PaginationModule } from 'src/common/pagination/pagination.module';
-import jwtConfig from 'src/auth/config/jwt.config';
-import { JwtModule } from '@nestjs/jwt';
-import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from 'src/auth/auth.module';
-import { APP_GUARD } from '@nestjs/core';
-import { AccessTokenGuard } from 'src/auth/gaurds/access-token/access-token.guard';
 import { CreateApplicationProvider } from './services/create-application.provider';
+import { UpdateApplicationProvider } from './services/update-application.provider';
 
 @Module({
   controllers: [ApplicationsController],
-  providers: [ApplicationService, GetApplicationsProvider, CreateApplicationProvider],
+  providers: [
+    ApplicationService,
+    GetApplicationsProvider,
+    CreateApplicationProvider,
+    UpdateApplicationProvider,
+  ],
   imports: [
     UsersModule,
     TypeOrmModule.forFeature([JobApplication]),

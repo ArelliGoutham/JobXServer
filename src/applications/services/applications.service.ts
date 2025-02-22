@@ -14,6 +14,8 @@ import { GetApplicationsQueryDto } from '../dtos/get-applications-query.dto';
 import { Paginated } from 'src/common/pagination/interfaces/paginated.inteface';
 import { CreateApplicationProvider } from './create-application.provider';
 import { ActiveUserData } from 'src/auth/interfaces/active-user-data.interface';
+import { UpdateApplicationDto } from '../dtos/update-application.dto';
+import { UpdateApplicationProvider } from './update-application.provider';
 
 /**
  * Job Applications service class implementation
@@ -26,12 +28,9 @@ export class ApplicationService {
    * @param applicationRepository
    */
   constructor(
-    private readonly userService: UserService,
-    @InjectRepository(JobApplication)
-    private readonly applicationRepository: Repository<JobApplication>,
-
     private readonly getApplicationsProvider: GetApplicationsProvider,
     private readonly createApplicationProvider: CreateApplicationProvider,
+    private readonly updateApplicationProvider: UpdateApplicationProvider,
   ) {}
 
   /**
@@ -61,5 +60,25 @@ export class ApplicationService {
     user: ActiveUserData,
   ): Promise<Paginated<JobApplication>> {
     return await this.getApplicationsProvider.getApplications(query, user);
+  }
+
+  /**
+   * Fetches Application by application Id
+   * @param id
+   * @returns
+   */
+  public async getApplicationById(id: number): Promise<JobApplication | null> {
+    return await this.getApplicationsProvider.getApplicationById(id);
+  }
+
+  /**
+   *  Updates complete application row with id
+   * @param application
+   * @returns
+   */
+  public async updateApplication(
+    application: UpdateApplicationDto,
+  ): Promise<JobApplication | null> {
+    return this.updateApplicationProvider.updateApplication(application);
   }
 }

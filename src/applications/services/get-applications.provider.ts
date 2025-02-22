@@ -2,7 +2,6 @@ import { Injectable, RequestTimeoutException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { JobApplication } from '../applications.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { GetUsersParamDto } from '../dtos/get-users-param.dto';
 import { GetApplicationsQueryDto } from '../dtos/get-applications-query.dto';
 import { PaginationProvider } from 'src/common/pagination/providers/pagination.provider';
 import { Paginated } from 'src/common/pagination/interfaces/paginated.inteface';
@@ -20,7 +19,6 @@ export class GetApplicationsProvider {
     query: GetApplicationsQueryDto,
     user: ActiveUserData,
   ): Promise<Paginated<JobApplication>> {
-    const { page = 1, limit = 6 } = query;
     let applications;
     try {
       applications = this.paginationProvider.paginateQuery(
@@ -37,5 +35,9 @@ export class GetApplicationsProvider {
       );
     }
     return applications;
+  }
+
+  public async getApplicationById(id: number): Promise<JobApplication | null> {
+    return await this.applicationRepository.findOneBy({ id });
   }
 }

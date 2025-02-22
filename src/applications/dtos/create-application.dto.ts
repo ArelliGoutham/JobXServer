@@ -5,11 +5,9 @@ import {
   IsUrl,
   IsNotEmpty,
   MinLength,
-  IsNumber,
 } from 'class-validator';
 import { ApplicationStatusEnum } from '../enums/application-status.enum';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
 
 export class CreateApplicationDto {
   @ApiProperty({ description: 'Company for which you are applying' })
